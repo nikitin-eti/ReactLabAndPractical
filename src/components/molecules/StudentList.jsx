@@ -1,8 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const StudentList = ({ students, filterActive }) => {
-  const filteredStudents = students.filter((s) => s.score >= 60);
-  const displayedStudents = filterActive ? filteredStudents : students;
+  const displayedStudents = filterActive ? students.filter((s) => s.isActive) : students;
 
   return (
     <div style={{ width: '100%', maxWidth: '800px' }}>
@@ -36,7 +36,14 @@ const StudentList = ({ students, filterActive }) => {
               }}
             >
               <div>
-                <span style={{ color: '#e2e8f0' }}>{student.name}</span>
+                <Link 
+                  to={`/student/${student.id}`}
+                  style={{ color: '#e2e8f0', textDecoration: 'none', fontWeight: 'bold' }}
+                  onMouseOver={(e) => e.target.style.color = '#22d3ee'}
+                  onMouseOut={(e) => e.target.style.color = '#e2e8f0'}
+                >
+                  {student.name}
+                </Link>
                 <span style={{ marginLeft: '15px', color: (student.score ?? 0) >= 60 ? '#10b981' : '#ef4444' }}>
                   [{ (student.score ?? -1) === -1 ? 'Дані пошкоджено' : (student.score >= 60 ? 'Зараховано' : 'Незараховано') }]
                 </span>
