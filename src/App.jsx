@@ -1,9 +1,8 @@
 import React from 'react';
 import './App.css';
 import Header from './components/Header';
-import Card from './components/molecules/Card/Card';
-import Input from './components/atoms/Input/Input';
-import Button from './components/atoms/Button/Button';
+import Post from './components/molecules/Post/Post';
+import { postsData } from './data';
 
 function App() {
   return (
@@ -13,36 +12,34 @@ function App() {
         style={{
           padding: '50px 20px',
           display: 'flex',
-          justifyContent: 'center',
+          flexDirection: 'column',
+          alignItems: 'center',
         }}
       >
-        <Card>
-          <h2
-            style={{
-              color: '#22d3ee',
-              fontFamily: 'monospace',
-              marginBottom: '30px',
-              textTransform: 'uppercase',
-              textAlign: 'center',
-              textShadow: '0 0 10px rgba(34, 211, 238, 0.5)',
-            }}
-          >
-            Авторизація терміналу
-          </h2>
-          <Input type="email" label="Email" placeholder="user@system.io" />
-          <Input type="password" label="Пароль" placeholder="••••••••" />
-          <div
-            style={{
-              display: 'flex',
-              gap: '15px',
-              marginTop: '20px',
-              width: '100%',
-            }}
-          >
-            <Button variant="primary">Увійти</Button>
-            <Button variant="secondary">Реєстрація</Button>
-          </div>
-        </Card>
+        <h2
+          style={{
+            color: '#22d3ee',
+            fontFamily: 'monospace',
+            marginBottom: '40px',
+            textTransform: 'uppercase',
+            textShadow: '0 0 10px rgba(34, 211, 238, 0.5)',
+          }}
+        >
+          Нейро-стрічка
+        </h2>
+        <div style={{ maxWidth: '600px', width: '100%' }}>
+          {postsData.map((post) => (
+            <Post
+              key={post.id}
+              id={post.id}
+              author={post.author}
+              avatar={post.avatar}
+              content={post.content}
+              date={post.date}
+              likes={post.likes}
+            />
+          ))}
+        </div>
       </main>
     </>
   );
