@@ -1,22 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Header from './components/Header';
 import Post from './components/molecules/Post/Post';
+import SearchBar from './components/molecules/SearchBar/SearchBar';
 import { postsData, students } from './data';
 
 function App() {
-  // 1. Сортування всіх студентів за спаданням балів
+  const [searchTerm, setSearchTerm] = useState('');
+  const [activeCategory, setActiveCategory] = useState('ALL');
+
+  // Категорії для фільтрації
+  const categories = ['ALL', 'SYSTEM', 'UPDATE', 'TECH', 'LOGS'];
+
+  // Логіка фільтрації
+  const filteredPosts = postsData.filter((post) => {
+    const matchesSearch =
+      post.content.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      post.author.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory =
+      activeCategory === 'ALL' || post.category === activeCategory;
+    return matchesSearch && matchesCategory;
+  });
+
+  // Лаб 1-2 логіка (залишаємо для консистентності)
   const sortedStudents = [...students].sort((a, b) => b.score - a.score);
-
-  // 2. Фільтрація елітних оперативників (активні та бал > 60)
-  const eliteOperatives = students.filter((s) => s.isActive && s.score > 60);
-
-  // 3. Підрахунок середнього бала активних студентів
   const activeStudents = students.filter((s) => s.isActive);
   const averageScore =
     activeStudents.length > 0
-      ? activeStudents.reduce((acc, curr) => acc + curr.score, 0) / activeStudents.length
+      ? activeStudents.reduce((acc, curr) => acc + curr.score, 0) /
+        activeStudents.length
       : 0;
+  const eliteOperatives = students.filter((s) => s.isActive && s.score > 60);
 
   return (
     <>
@@ -30,7 +44,76 @@ function App() {
           fontFamily: 'monospace',
         }}
       >
-        <section style={{ width: '100%', maxWidth: '800px', marginBottom: '60px' }}>
+        <h2
+          style={{
+            color: '#22d3ee',
+            textTransform: 'uppercase',
+            textShadow: '0 0 10px rgba(34, 211, 238, 0.5)',
+            marginBottom: '30px',
+          }}
+        >
+          Термінал Доступу до Даних
+        </h2>
+
+        <SearchBar searchTerm={searchTerm} onSearchChange={setSearchTerm} />
+
+        <div
+          style={{
+            display: 'flex',
+            gap: '10px',
+            marginBottom: '40px',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+          }}
+        >
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              style={{
+                padding: '8px 16px',
+                backgroundColor: activeCategory === cat ? '#22d3ee' : '#0f172a',
+                color: activeCategory === cat ? '#0f172a' : '#22d3ee',
+                border: `1px solid #22d3ee`,
+                fontFamily: 'monospace',
+                cursor: 'pointer',
+                textTransform: 'uppercase',
+                transition: 'all 0.3s ease',
+                boxShadow:
+                  activeCategory === cat
+                    ? '0 0 15px #22d3ee'
+                    : 'none',
+                fontWeight: activeCategory === cat ? 'bold' : 'normal',
+              }}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+
+        <div style={{ width: '100%', maxWidth: '600px' }}>
+          {filteredPosts.length > 0 ? (
+            filteredPosts.map((post) => <Post key={post.id} {...post} />)
+          ) : (
+            <div
+              style={{
+                padding: '40px',
+                border: '1px solid #ef4444',
+                backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                color: '#ef4444',
+                textAlign: 'center',
+                textTransform: 'uppercase',
+                textShadow: '0 0 5px #ef4444',
+                borderRadius: '4px',
+              }}
+            >
+              Системна помилка: Записів за вашим запитом не знайдено.
+            </div>
+          )}
+        </div>
+
+        {/* Секції з попередніх робіт */}
+        <section style={{ width: '100%', maxWidth: '800px', marginBottom: '60px', marginTop: '60px' }}>
           <h2
             style={{
               color: '#22d3ee',
@@ -130,22 +213,6 @@ function App() {
             Загальний системний рейтинг: {averageScore.toFixed(1)}
           </h2>
         </section>
-
-        <div style={{ marginTop: '100px', width: '100%', maxWidth: '600px' }}>
-          <h2
-            style={{
-              color: '#a855f7',
-              textAlign: 'center',
-              textTransform: 'uppercase',
-              marginBottom: '30px',
-            }}
-          >
-            Нейро-стрічка
-          </h2>
-          {postsData.map((post) => (
-            <Post key={post.id} {...post} />
-          ))}
-        </div>
       </main>
     </>
   );
