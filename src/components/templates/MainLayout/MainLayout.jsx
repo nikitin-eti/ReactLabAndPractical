@@ -22,10 +22,22 @@ const MainLayout = () => {
             {({ isActive }) => <>{isActive && '> '}ЛОГИ_МЕРЕЖІ</>}
           </NavLink>
           <NavLink 
+            to="/students" 
+            className={({ isActive }) => (isActive ? `${styles.link} ${styles.active}` : styles.link)}
+          >
+            {({ isActive }) => <>{isActive && '> '}КЕРУВАННЯ_КАДЕТАМИ</>}
+          </NavLink>
+          <NavLink 
+            to="/equipment" 
+            className={({ isActive }) => (isActive ? `${styles.link} ${styles.active}` : styles.link)}
+          >
+            {({ isActive }) => <>{isActive && '> '}ЕКІПІРУВАННЯ</>}
+          </NavLink>
+          <NavLink 
             to="/profile" 
             className={({ isActive }) => (isActive ? `${styles.link} ${styles.active}` : styles.link)}
           >
-            {({ isActive }) => <>{isActive && '> '}ПРОФІЛЬ_ОПЕРАТИВНИКА</>}
+            {({ isActive }) => <>{isActive && '> '}ПРОФІЛЬ</>}
           </NavLink>
         </nav>
       </header>

@@ -13,7 +13,7 @@ const ProfilePage = () => {
     // Імітація завантаження секретних даних
     const timer = setTimeout(() => {
       setUserData({
-        name: 'Maksym Zinin',
+        name: 'Дмитро Мітькін',
         email: user?.email || 'unknown@cyber.net',
         role: 'Senior Operative',
       });

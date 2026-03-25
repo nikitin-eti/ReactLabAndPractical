@@ -8,7 +8,8 @@ import ProfilePage from './pages/ProfilePage';
 import NotFound from './pages/NotFound';
 import Login from './pages/Login/Login';
 import ProtectedRoute from './components/hoc/ProtectedRoute';
-import ProductContainer from './components/Product/ProductContainer';
+import StudentsPage from './pages/StudentsPage';
+import EquipmentPage from './pages/EquipmentPage';
 
 function App() {
   return (
@@ -19,7 +20,8 @@ function App() {
         <Route path="feed" element={<Feed />} />
         <Route path="feed/:postId" element={<PostPage />} />
         <Route path="profile/*" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
-        <Route path="equipment" element={<ProductContainer />} />
+        <Route path="students" element={<StudentsPage />} />
+        <Route path="equipment" element={<EquipmentPage />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
