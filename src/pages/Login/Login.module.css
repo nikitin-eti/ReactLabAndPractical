@@ -1,0 +1,84 @@
+.loginContainer {
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: radial-gradient(circle, #111827 0%, #030617 100%);
+  width: 100%;
+}
+
+.terminalForm {
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid #22d3ee;
+  padding: 40px;
+  width: 100%;
+  max-width: 450px;
+  position: relative;
+  box-shadow: 0 0 30px rgba(34, 211, 238, 0.15);
+  border-radius: 4px;
+}
+
+.scanline {
+  width: 100%;
+  height: 2px;
+  background: rgba(34, 211, 238, 0.3);
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  animation: scan 6s linear infinite;
+}
+
+@keyframes scan {
+  0% { top: 0; }
+  100% { top: 100%; }
+}
+
+.title {
+  color: #22d3ee;
+  font-family: 'Courier New', Courier, monospace;
+  text-align: center;
+  margin-bottom: 40px;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px #22d3ee;
+  font-size: 20px;
+}
+
+.inputGroup {
+  margin-bottom: 25px;
+}
+
+.buttonWrapper {
+  margin-top: 40px;
+}
+
+.buttonWrapper button {
+  background-color: transparent !important;
+  border: 2px solid #22c55e !important;
+  color: #22c55e !important;
+  font-weight: bold !important;
+  letter-spacing: 1px !important;
+  animation: pulseGreen 2s infinite alternate;
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.4) !important;
+}
+
+@keyframes pulseGreen {
+  0% { transform: scale(1); box-shadow: 0 0 10px rgba(34, 197, 94, 0.4); }
+  100% { transform: scale(1.02); box-shadow: 0 0 25px rgba(34, 197, 94, 0.8); }
+}
+
+.consoleFooter {
+  margin-top: 25px;
+  font-size: 11px;
+  color: #475569;
+  font-family: monospace;
+}
+
+.blink {
+  animation: blink 1s step-end infinite;
+  color: #22d3ee;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
