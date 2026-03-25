@@ -1,13 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import Post from '../components/molecules/Post/Post';
 import SearchBar from '../components/molecules/SearchBar/SearchBar';
 import { postsData } from '../data';
 import { Link } from 'react-router-dom';
 
+const generateHeavyAnalytics = (num) => {
+  console.log('--- ВИКОНУЄТЬСЯ ВАЖКИЙ АНАЛІЗ ---');
+  let result = 0;
+  for (let i = 0; i < 1000000000; i++) {
+    result += num;
+  }
+  return result;
+};
+
 const Feed = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [analyticsNumber, setAnalyticsNumber] = useState(1);
   const [activeCategory, setActiveCategory] = useState('ALL');
   const categories = ['ALL', 'SYSTEM', 'UPDATE', 'TECH', 'LOGS'];
+
+  // Оптимізація: вежкі обчислення виконуються лише при зміні analyticsNumber
+  const memoizedAnalytics = useMemo(() => generateHeavyAnalytics(analyticsNumber), [analyticsNumber]);
 
   const filteredPosts = postsData.filter((post) => {
     const matchesSearch =
@@ -23,6 +36,17 @@ const Feed = () => {
       <h2 style={{ color: '#22d3ee', textTransform: 'uppercase', marginBottom: '30px', textShadow: '0 0 10px #22d3ee' }}>
         Термінал Доступу до Даних
       </h2>
+
+      <div style={{ marginBottom: '20px', padding: '15px', border: '1px dashed #22d3ee', color: '#22d3ee', fontFamily: 'monospace' }}>
+        <p>СИСТЕМНИЙ_АНАЛІЗ: {memoizedAnalytics}</p>
+        <label>ЗМІНИТИ_ПАРАМЕТР: </label>
+        <input 
+          type="number" 
+          value={analyticsNumber} 
+          onChange={(e) => setAnalyticsNumber(Number(e.target.value))}
+          style={{ backgroundColor: '#0f172a', color: '#22d3ee', border: '1px solid #22d3ee', outline: 'none' }}
+        />
+      </div>
       
       <SearchBar searchTerm={searchTerm} onSearchChange={setSearchTerm} />
 
