@@ -1,0 +1,32 @@
+.logLine {
+  background-color: #000;
+  color: #22c55e;
+  font-family: 'Courier New', Courier, monospace;
+  padding: 8px 15px;
+  border-left: 2px solid #22c55e;
+  margin-bottom: 5px;
+  font-size: 13px;
+  animation: flicker 0.1s infinite alternate;
+  width: 100%;
+}
+
+.timestamp {
+  color: #15803d;
+}
+
+.action {
+  letter-spacing: 1px;
+}
+
+.cursor {
+  animation: blink 0.8s step-end infinite;
+}
+
+@keyframes flicker {
+  0% { opacity: 0.95; }
+  100% { opacity: 1; }
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}

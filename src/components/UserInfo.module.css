@@ -1,0 +1,58 @@
+.dossierCard {
+  background-color: #0f172a;
+  border: 1px solid #0ea5e9;
+  padding: 25px;
+  width: 100%;
+  max-width: 450px;
+  box-shadow: 0 0 15px rgba(14, 165, 233, 0.2);
+  margin-bottom: 30px;
+  position: relative;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  border-bottom: 1px solid rgba(14, 165, 233, 0.3);
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+.icon {
+  color: #0ea5e9;
+  font-size: 24px;
+  text-shadow: 0 0 10px #0ea5e9;
+}
+
+.title {
+  color: #f8fafc;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 18px;
+  letter-spacing: 2px;
+  margin: 0;
+}
+
+.infoRow {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-family: monospace;
+}
+
+.label {
+  color: #64748b;
+  font-size: 12px;
+}
+
+.value {
+  color: #e2e8f0;
+  font-size: 14px;
+}
+
+.roleValue {
+  color: #0ea5e9;
+  font-weight: bold;
+  text-shadow: 0 0 5px #0ea5e9;
+  text-transform: uppercase;
+}
