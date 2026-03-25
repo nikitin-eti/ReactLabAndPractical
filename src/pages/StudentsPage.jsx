@@ -5,11 +5,12 @@ import StudentList from '../components/molecules/StudentList';
 import StatisticsData from '../components/molecules/StatisticsData';
 import Input from '../components/atoms/Input/Input';
 import { students as initialStudents } from '../data';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 const StudentsPage = () => {
   const [studentList, setStudentList] = useState(initialStudents);
   const [filterActive, setFilterActive] = useState(false);
-  const [activeTab, setActiveTab] = useState('list');
+  const [activeTab, setActiveTab] = useLocalStorage('active_tab', 'list');
   const [searchParams, setSearchParams] = useSearchParams();
 
   const query = searchParams.get('query') || '';

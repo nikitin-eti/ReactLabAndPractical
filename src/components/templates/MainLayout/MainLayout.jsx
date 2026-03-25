@@ -1,10 +1,29 @@
 import React from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import styles from './MainLayout.module.css';
+import useOnlineStatus from '../../../hooks/useOnlineStatus';
 
 const MainLayout = () => {
+  const isOnline = useOnlineStatus();
+
   return (
     <div className={styles.layout}>
+      {!isOnline && (
+        <div style={{
+          backgroundColor: '#f43f5e',
+          color: 'white',
+          textAlign: 'center',
+          padding: '10px',
+          fontWeight: 'bold',
+          position: 'sticky',
+          top: 0,
+          zIndex: 1000,
+          textShadow: '0 0 10px rgba(0,0,0,0.5)',
+          fontFamily: 'monospace'
+        }}>
+          ⚠️ ПОМИЛКА МЕРЕЖІ: КІБЕР-ПРОСТІР ПЕРЕБУВАЄ В ОФЛАЙН-РЕЖИМІ
+        </div>
+      )}
       <header className={styles.header}>
         <div className={styles.logo}>CYBER_NET [v4.0.1]</div>
         <nav className={styles.nav}>

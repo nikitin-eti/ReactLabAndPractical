@@ -1,11 +1,27 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import useWindowSize from '../../hooks/useWindowSize';
 
 const StudentList = ({ students, filterActive }) => {
+  const { width } = useWindowSize();
+  const isMobile = width < 768;
   const displayedStudents = filterActive ? students.filter((s) => s.isActive) : students;
 
   return (
     <div style={{ width: '100%', maxWidth: '800px' }}>
+      {isMobile && (
+        <div style={{ 
+          backgroundColor: 'rgba(34, 211, 238, 0.1)', 
+          color: '#22d3ee', 
+          padding: '10px', 
+          textAlign: 'center', 
+          marginBottom: '20px',
+          border: '1px solid #22d3ee',
+          fontFamily: 'monospace'
+        }}>
+          📱 МОБІЛЬНА ВЕРСІЯ: ІНТЕРФЕЙС ОПТИМІЗОВАНО
+        </div>
+      )}
       <h2
         style={{
           color: '#22d3ee',
@@ -20,12 +36,12 @@ const StudentList = ({ students, filterActive }) => {
       </h2>
       
       {displayedStudents.length > 0 ? (
-        <div style={{ display: 'grid', gap: '15px' }}>
+        <div style={{ display: 'grid', gap: isMobile ? '8px' : '15px' }}>
           {displayedStudents.map((student) => (
             <div
               key={student.id}
               style={{
-                padding: '15px',
+                padding: isMobile ? '10px' : '15px',
                 border: '1px solid #334155',
                 backgroundColor: '#1e293b',
                 display: 'flex',
@@ -33,6 +49,7 @@ const StudentList = ({ students, filterActive }) => {
                 borderRadius: '4px',
                 fontFamily: 'monospace',
                 opacity: student.isActive ? 1 : 0.4,
+                fontSize: isMobile ? '14px' : '16px'
               }}
             >
               <div>
