@@ -1,0 +1,43 @@
+.formTerminal {
+  width: 100%;
+  max-width: 500px;
+  background-color: rgba(15, 23, 42, 0.9);
+  border: 2px solid #22d3ee;
+  padding: 30px;
+  border-radius: 0;
+  box-shadow: 0 0 15px rgba(34, 211, 238, 0.4);
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 40px;
+  animation: pulseBorder 4s infinite alternate;
+}
+
+@keyframes pulseBorder {
+  0% { border-color: #22d3ee; box-shadow: 0 0 10px rgba(34, 211, 238, 0.4); }
+  50% { border-color: #a855f7; box-shadow: 0 0 20px rgba(168, 85, 247, 0.4); }
+  100% { border-color: #22d3ee; box-shadow: 0 0 10px rgba(34, 211, 238, 0.4); }
+}
+
+.title {
+  color: #22d3ee;
+  text-transform: uppercase;
+  margin-bottom: 25px;
+  text-align: center;
+  font-family: 'Courier New', Courier, monospace;
+  letter-spacing: 2px;
+  text-shadow: 0 0 5px #22d3ee;
+}
+
+.field {
+  margin-bottom: 20px;
+}
+
+.errorText {
+  color: #f43f5e;
+  font-size: 12px;
+  font-family: monospace;
+  margin-top: 5px;
+  display: block;
+  text-shadow: 0 0 8px rgba(244, 63, 94, 0.6);
+  text-transform: uppercase;
+}

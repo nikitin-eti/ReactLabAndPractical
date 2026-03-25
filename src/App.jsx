@@ -6,12 +6,16 @@ import SearchBar from './components/molecules/SearchBar/SearchBar';
 import StudentList from './components/molecules/StudentList';
 import StatisticsData from './components/molecules/StatisticsData';
 import AboutAuthor from './components/molecules/AboutAuthor';
-import { postsData, students } from './data';
+import AddStudentForm from './components/organisms/AddStudentForm';
+import { postsData, students as initialStudents } from './data';
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [activeCategory, setActiveCategory] = useState('ALL');
   
+  // Пр 4: Стейт для списку студентів
+  const [studentList, setStudentList] = useState(initialStudents);
+
   // Пр 3: Нові стейти
   const [showHelp, setShowHelp] = useState(false);
   const [filterActive, setFilterActive] = useState(false);
@@ -27,6 +31,10 @@ function App() {
       activeCategory === 'ALL' || post.category === activeCategory;
     return matchesSearch && matchesCategory;
   });
+
+  const handleAddStudent = (newStudent) => {
+    setStudentList((prev) => [newStudent, ...prev]);
+  };
 
   return (
     <>
@@ -105,6 +113,8 @@ function App() {
 
         {activeTab === 'list' && (
           <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <AddStudentForm onAddStudent={handleAddStudent} />
+            
             <button
               onClick={() => setFilterActive(!filterActive)}
               style={{
@@ -119,11 +129,11 @@ function App() {
             >
               {filterActive ? 'Показати всіх' : 'Показати тільки успішних'}
             </button>
-            <StudentList students={students} filterActive={filterActive} />
+            <StudentList students={studentList} filterActive={filterActive} />
           </div>
         )}
 
-        {activeTab === 'stats' && <StatisticsData students={students} />}
+        {activeTab === 'stats' && <StatisticsData students={studentList} />}
         
         {activeTab === 'author' && <AboutAuthor />}
 

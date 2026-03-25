@@ -35,3 +35,11 @@
   box-shadow: 0 0 15px #a855f7;
   text-shadow: 0 0 5px #a855f7;
 }
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+  text-shadow: none;
+  border-color: #4b5563;
+}
